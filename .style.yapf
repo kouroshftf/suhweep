@@ -1,0 +1,15 @@
+[style]
+
+
+based_on_style=google
+
+force_multiline_dict=False
+column_limit=120
+indent_dictionary_value=True
+indent_width=4
+use_tabs=False
+
+# not being respected, i have no idea why. maybe trace/debug.
+blank_lines_around_top_level_definition = 2
+blank_lines_between_top_level_imports_and_variables = 2
+
