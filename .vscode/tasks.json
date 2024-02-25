@@ -10,11 +10,12 @@
     },
     "tasks": [
         {
-            "label": "task_demo",
+            "label": "task_run_uvicorn",
             "type": "process",
-            "command": "printf",
+            "command": "pipenv",
             "args": [
-                "${file} \n\n${workspaceFolder} \n\n\n\n"
+                "run",
+                "${workspaceFolder}/.vscode/run_uvicorn.sh"
             ],
             "presentation": {
                 "reveal": "always",
