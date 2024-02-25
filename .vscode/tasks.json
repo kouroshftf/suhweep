@@ -38,6 +38,26 @@
                 "panel": "dedicated"
             },
             "problemMatcher": []
+        },
+        // -------------------------------------------------------------------------------------------------------------
+        {
+            "label": "task_yapf_in_place",
+            "type": "process",
+            "command": "pipenv",
+            "args": [
+                "run",
+                "yapf",
+                "-i",
+                "-vv",
+                "--style \"{based_on_style: pep8, indent_width: 4, column_limit: 120}\"",
+                "${file}"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "clear": true,
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
         }
     ]
 }
