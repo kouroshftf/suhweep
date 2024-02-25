@@ -1,8 +1,6 @@
-
 import os
 import sys
 import plotly
-
 
 from foo import barbaz as bz
 
@@ -12,4 +10,3 @@ if __name__ == '__main__':
     print("Hi")
     bz.tazbaz()
     print(os.environ["PYTHONPATH"])
-
