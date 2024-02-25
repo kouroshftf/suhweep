@@ -5,6 +5,15 @@ name = "pypi"
 
 [packages]
 chart-studio = "*"
+pandas = "*"
+numpy = "*"
+requests = "*"
+ipywidgets = "*"
+jupyterlab = "*"
+# pymysql = "*"
+# tornado = "*"
+fastapi = "*"
+uvicorn = {version = "*", extras = ["standard"]}
 
 [dev-packages]
 pylint = "*"

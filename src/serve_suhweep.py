@@ -11,5 +11,5 @@ from foo import barbaz as bz
 if __name__ == '__main__':
     print("Hi")
     bz.tazbaz()
-    print(sys.executable)
+    print(os.environ["PYTHONPATH"])
 
