@@ -16,6 +16,21 @@
                 "panel": "dedicated"
             },
             "problemMatcher": []
+        },
+        // -------------------------------------------------------------------------------------------------------------
+        {
+            "label": "task_run_in_python",
+            "type": "process",
+            "command": "python3",
+            "args": [
+                "${file}"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "clear": true,
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
         }
     ]
 }
