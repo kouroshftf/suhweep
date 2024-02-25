@@ -2,6 +2,11 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
+    "options": {
+        "env": {
+            "PIPENV_VERBOSITY": "-1"
+        }
+    },
     "tasks": [
         {
             "label": "task_demo",
@@ -21,9 +26,10 @@
         {
             "label": "task_run_in_python",
             "type": "process",
-            "command": "python3",
+            "command": "bash",
             "args": [
-                "${file}"
+                "-c",
+                "clear && pipenv run python3 ${file}"
             ],
             "presentation": {
                 "reveal": "always",
