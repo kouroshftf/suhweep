@@ -12,10 +12,23 @@
         {
             "label": "task_run_uvicorn",
             "type": "process",
-            "command": "pipenv",
+            "command": "bash",
             "args": [
-                "run",
                 "${workspaceFolder}/.vscode/run_uvicorn.sh"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "clear": true,
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task_rjn",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/.vscode/rjn.sh"
             ],
             "presentation": {
                 "reveal": "always",

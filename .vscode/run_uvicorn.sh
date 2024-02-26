@@ -4,6 +4,6 @@ cd $(git rev-parse --show-toplevel)
 
 cd src
 
-uvicorn --port 7780  serve_suhweep:app --reload
+pipenv run uvicorn --port 7780  serve_suhweep:app --reload
 
 
