@@ -1,4 +1,3 @@
-
 import os
 import json
 import random
@@ -10,7 +9,7 @@ from dataclasses import dataclass
 MAX_MINE_FRACTION = 0.8
 
 CELL_CLEAR = '-'
-CELL_MINE  = '*'
+CELL_MINE = '*'
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -24,9 +23,11 @@ class Cell:
         return f"<{self.r}, {self.c}>"
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 class GameGrid:
-    def __init__(self, rows, cols, mine_count):
 
+    def __init__(self, rows, cols, mine_count):
         self.rows = rows
         self.cols = cols
         self.mine_count = mine_count
@@ -34,7 +35,6 @@ class GameGrid:
         max_number_of_mines_allowed = int(rows * cols * MAX_MINE_FRACTION)
         if mine_count >= max_number_of_mines_allowed:
             raise Exception(f"Too many mines. Cant place {mine_count} mines in {rows} x {cols} grid.")
-
 
         self.grid = []
         self.cells = []
@@ -45,16 +45,23 @@ class GameGrid:
             for c in range(cols):
                 curr_row.append(CELL_CLEAR)
                 self.cells.append(Cell(r, c))
-        
 
-        # randomly place mines
-        while mine_count > 0:
+    # ---------------------------------
+    def clear_and_remine(self):
+        """ Clear grid and randomly place mines in the grid. """
+
+        for r in range(self.rows):
+            for c in range(self.cols):
+                self.grid[r][c] = CELL_CLEAR
+
+        tmp_mc = self.mine_count
+        while tmp_mc > 0:
             cell = random.choice(self.cells)
             if CELL_CLEAR == self.grid[cell.r][cell.c]:
                 self.grid[cell.r][cell.c] = CELL_MINE
-                mine_count -= 1
+                tmp_mc -= 1
 
-
+    # ---------------------------------
     def __str__(self) -> str:
         mines = ""
         indices = ""
@@ -66,13 +73,18 @@ class GameGrid:
             # ---
             indices += "\n"
             mines += "\n"
+            cells = " ".join([str(c) for c in self.cells])
 
-        return indices + "\n\n" + mines + "\n\n" + " ".join([str(c) for c in self.cells])
-
+        return mines
+        # return indices + "\n\n" + mines  # + "\n\n" + cells
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
     gg = GameGrid(8, 12, 12)
 
+    print(str(gg))
+    gg.clear_and_remine()
+    print(str(gg))
+    gg.clear_and_remine()
     print(str(gg))
