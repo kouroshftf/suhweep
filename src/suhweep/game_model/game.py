@@ -26,7 +26,6 @@ class Cell:
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 class GameGrid:
-
     def __init__(self, rows, cols, mine_count):
         self.rows = rows
         self.cols = cols
@@ -62,6 +61,52 @@ class GameGrid:
                 tmp_mc -= 1
 
     # ---------------------------------
+    def is_valid_cell(self, c: Cell):
+        if (c.r < 0) or (c.c < 0):
+            return False
+        
+        if (c.r >= self.rows):
+            return False
+        
+        if (c.c >= self.cols):
+            return False
+        
+        return True
+
+
+    # ---------------------------------
+    def calculate_adj_numbers(self):
+
+        for c in self.cells:
+            adj_theoretical_cells = []
+            adj_valid_cells = []
+            adj_theoretical_cells.append(Cell(c.r+1, c.c))  # below (S)
+            adj_theoretical_cells.append(Cell(c.r+1, c.c+1))  # SE
+            adj_theoretical_cells.append(Cell(c.r+1, c.c-1))  # SW
+            adj_theoretical_cells.append(Cell(c.r-1, c.c))  # above (N)
+            adj_theoretical_cells.append(Cell(c.r-1, c.c+1))  # NE
+            adj_theoretical_cells.append(Cell(c.r-1, c.c-1))  # NW
+            adj_theoretical_cells.append(Cell(c.r, c.c-1))  # W
+            adj_theoretical_cells.append(Cell(c.r, c.c+1))  # E
+
+            for tc in adj_theoretical_cells:
+                if self.is_valid_cell(tc):
+                    adj_valid_cells.append(tc)
+
+            # ---
+            nearby_mines = 0
+            for vac in adj_valid_cells:
+                if CELL_MINE == self.grid[vac.r][vac.c]:
+                    nearby_mines += 1
+
+            # ---
+            if (nearby_mines > 0) and (CELL_MINE != self.grid[c.r][c.c]):
+                self.grid[c.r][c.c] = nearby_mines
+
+
+
+
+    # ---------------------------------
     def __str__(self) -> str:
         mines = ""
         indices = ""
@@ -75,8 +120,8 @@ class GameGrid:
             mines += "\n"
             cells = " ".join([str(c) for c in self.cells])
 
-        return mines
-        # return indices + "\n\n" + mines  # + "\n\n" + cells
+        # return mines
+        return indices + "\n\n" + mines  # + "\n\n" + cells
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
@@ -86,5 +131,7 @@ if __name__ == '__main__':
     print(str(gg))
     gg.clear_and_remine()
     print(str(gg))
-    gg.clear_and_remine()
+    gg.calculate_adj_numbers()
     print(str(gg))
+    # gg.clear_and_remine()
+    # print(str(gg))
